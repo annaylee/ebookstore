@@ -1,0 +1,12 @@
+{
+  "name": "project-ebook-landing-page-using-bootstrap-5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}

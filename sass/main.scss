@@ -1,0 +1,47 @@
+// need to install vscode extension 'live sass compiler'.
+// must restart vscode to have it take effect. 
+// it will watch for any changes that are saved in the scss
+// and automatically compile scss to css.
+
+
+// we want to override the values from the bootstrap import.
+// let's open bootstrap -> scss -> _variables.scss to view color variables
+// we want to update the value of $primary variable. so we have to place
+// it above bootstrap import because there is a sass feature that assign 
+// $primary to blue only if it is not defined: $primary: blue !default 
+// then we need to use a sass compiler to compile into a final css so that 
+// it can be used in our project.
+// we will need to install the vscode extension 'Live Sass Compiler' and
+// RESTART vscode to see the effect. This extension will be watching
+// for changes made and saved in the scss file and automatically compile
+// into css.
+
+// to configure where css is outputted, click on vscode "settings" ->
+// search for "live sass format" to look for "Live Sass Compile > Settings: Formats"
+// and click on "Edit in settings.json"
+
+// #c29938 golden color, original
+// #e3902d orange color, image book cover border
+
+// custom variables
+$primary: #d17b12;
+$light: #fbf5e5;
+
+// import the functions & variables
+// _functions file must come before _variables file because _variables file uses it
+// these 2 imports must come after any variables you redefine
+// e.g. $primary and $light because these files may use bootstrap variables and
+// if redefined variables are after the 2 imports, the redefined values may not work
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+$custom-theme-colors: (
+    "altlight": #f2ebfa,
+    "altdark": #522192
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+// import bootstrap file
+@import '../node_modules/bootstrap/scss/bootstrap';

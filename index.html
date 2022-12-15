@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Get Bootstrap CSS & JS CDN from https://getbootstrap.com/docs/5.2/getting-started/introduction/ 
+          so that we can use Bootstrap classes and components -->
+    <!--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    -->
+
+    <!-- Our custom CSS with Sass Compiling -->
+    <link rel="stylesheet" href="/css/main.min.css">
+
+    <!--  Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>eBookstore</title>
+    <style>
+        /* set top & bottom paddings for each section because by default bootstrap has no padding */
+        section { padding: 40px 0; }
+    </style>
+</head>
+<body>
+
+    <!-- navbar -->
+    <!-- must add 'navbar-expand-md' to have navbar collape for smaller screens and expand 
+         for med+ screens. must have 'navbar-light' or it won't show the sandwich bar -->
+
+    <nav class="navbar navbar-expand-md navbar-light py-3">
+    
+        <!-- use container-xxl so that the navbar won't go all the way across the top -->
+        <!-- content will be shown at 100% width until reaches the extra large screen -->
+
+        <div class="container-xxl">
+
+            <a href="#intro" class="navbar-brand">
+               <span class="fw-bold text-dark">
+                <i class="bi bi-book-half"></i> <!-- this is a bootstrap icon -->
+                   eBookstore
+            </span>
+            </a>
+
+            <!-- toggle button for mobile nav -->
+            <!-- data-bs-target is telling bootstrap which collapsable section we want to target -->
+            <!-- all aria attributes are for screen readers to better understand structure of web page -->
+            <!-- aria-controls is telling what it controls, and
+                 aria-expanded is telling what it controls is not expandable -->
+
+            <!-- "navbar-toggler" is a bootstrap class for toggle button -->
+            <!-- add data-bs-toggle="collapse" and data-bs-target to the button
+                 to automatically assign control of a collapsable element --> 
+
+            <button class="navbar-toggler" type="button" 
+                    data-bs-toggle="collapse" data-bs-target="#main-nav" 
+                    aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <!-- need to have a <span> inside the <button> -->
+                    <!-- this icon is what we click to expand/collapse -->
+
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- navbar links -->
+            <!-- <div> for navbar link must have a "collapse" class because 
+                 it is what is controlled by data-bs-toggle (see above) -->
+            <!-- 'justify-content-end' is to have the main-nav shift to the right -->
+            <!-- not sure 'align-center' is needed. don't see the difference -->
+
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#topics" class="nav-link fw-bold text-dark">About The Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reviews" class="nav-link fw-bold text-dark">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link fw-bold text-dark">Get in Touch</a>
+                    </li>
+
+                    <!-- the two links all go to #pricing. 
+                         the 1st link is styled as a link & the 2nd link is styled as a button
+                         we don't want to show the 1st link for med+ size screens
+                         because we want to show the 2nd link as an inline button -->
+
+                    <li class="nav-item d-md-none">
+                        <a href="#pricing" class="nav-link">Pricing</a>
+                    </li>
+                    <li class="nav-item ms-2 d-none d-md-inline">
+                        <a href="#pricing" class="btn btn-dark">Buy Now</a>
+                    </li>
+                </ul>
+            </div> <!-- end of navbar links -->
+        </div> <!-- end of container-xxl -->
+    </nav> <!-- end of nav -->
+
+    <!-- main image & intro text -->
+    <section id="intro">
+    
+        <!-- CONTAINER: every grid goes inside of a container. so create a container first -->
+        <!-- content will be shown at 100% for screen sizes smaller than large -->
+        <!-- add 'align-items-center' to align all items on the row in the center -->
+
+        <div class="container-lg">  
+
+            <!-- ROW: create a row inside of the container -->
+            <div class="row justify-content-center align-items-center">
+                
+                <!-- using bootstrap grid system for laying out the text col and the img col -->
+
+                <!-- COL 1: TEXT -->
+                <div class="text-center col-md-5 text-md-start">
+                    <h1>
+                        <div class="display-3">Kathreen A.</div>
+                        <div class="display-5 text-muted">America's #1 Guide to Natural Health</div>
+                    </h1>
+                    <p class="lead my-4 text-muted">
+                       A Practical A-to-Z Reference to Drug-Free Remedies using Vitamins, 
+                       Minerals, Herbs & Food Supplements
+                    </p>
+                    <a href="#pricing" class="btn btn-dark">Buy Now</a>
+
+                    <!-- open sidebar / offcanvas -->
+                    <!-- by default <a> is displayed inline
+                         but here we want it to be displayed as a block so that we can apply margin top -->
+                    <!-- data-bs-toggle="offcanvas" is telling what kind of functionality when clicked -->
+                    <a href="#sidebar" class="d-block mt-3" data-bs-toggle="offcanvas" 
+                       role="button" aria-controls="sidebar">
+                       Explore other books from the author
+                    </a>
+                </div>
+
+                <!-- COL 2: IMAGE -->
+                <!-- add "img-fluid" for <img> to have the image shown at 100% of the parent space -->
+                <!-- add "d-none d-md-block" so that the image is not shown for smaller screens 
+                     until the size of the screen reach medium size+ then it is shown as block -->
+
+                <div class="text-center col-md-5 d-none d-md-block">
+                    <!-- the data-bs-placement="bottom" is to have the tooltip title appear
+                         at the bottom of the arrow. but i think this is no longer needed -->
+                    <span class="tt" data-bs-placement="" title="Book Cover">  <!-- "tt" is not a bootstrap class -->
+                        <img class="img-fluid" src="/assets/ebook_cover_jpeg_high.jpg" alt="ebook cover">
+                    </span>
+                </div>
+
+            </div> <!-- row -->
+
+        </div> <!-- container-lg -->
+
+    </section> <!-- intro -->
+
+
+    <!-- pricing plans -->
+    <!-- bg-light for light background -->
+    <section id="pricing" class="bg-primary my-1">
+
+        <!-- CONTAINER: a container inside the section is needed for bootstrap grid -->
+        <div class="container-lg">
+
+            <div class="text-center">
+                <h2>
+                    <i class="bi bi-wallet-fill"></i>
+                    Pricing Plans
+                </h2>
+                <!-- add "lead" class to make it looks bigger -->
+                <p class="lead">Choose a Pricing Plan to Suit your Budget</p>
+            </div>
+
+            <!-- ROW -->
+            <div class="row my-3 justify-content-center align-items-center g-1">
+
+                <!--col-8 is default width, then col-lg-4 for large screen -->
+                <div class="col-8 col-lg-4">
+
+                    <!-- CARD -->
+                    <!-- all cards has a "card" class -->
+                    <div class="card border-1">
+                        <div class="card-header text-center text-primary">Beginner</div>
+                        <div class="card-body text-center py-2">
+                            <h4 class="card-title">Starter Edition</h4>
+                            <p class="card-subtitle">eBook download only</p>
+                            <p class="display-5 my-2 text-primary fw-light">$12.99</p>
+                            <p class="card-text mx-3 text-muted d-none d-lg-block">
+                                Suitable for anyone looking for a basic understanding of 
+                                vitamins, minerals, proteins, fats, carbohydrates, and 
+                                their choices on health.
+                            </p>
+                            <a href="#" class="btn btn-outline-primary btn-lg mt-1">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-lg-4">
+                    <div class="card border-primary border-2">
+                        <div class="card-header text-center text-primary">Most Popular</div>
+                        <div class="card-body text-center py-2">
+                            <h4 class="card-title">Complete Edition</h4>
+                            <p class="card-subtitle">eBook download & updates</p>
+                            <p class="display-5 my-2 text-primary fw-bold">$18.99</p>
+                            <p class="card-text mx-3 text-muted d-none d-lg-block">
+                                Suitable for anyone looking for a deeper understanding of 
+                                nutrition and how to use natural remedies for healings
+                                and optimal health.
+                            </p>
+                            <a href="#" class="btn btn-outline-primary btn-lg mt-0">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 col-lg-4">
+                    <div class="card border-1">
+                        <div class="card-header text-center text-primary">Advanced</div>
+                        <div class="card-body text-center py-2">
+                            <h4 class="card-title">Ultimate Edition</h4>
+                            <p class="card-subtitle">download, updates & extras</p>
+                            <p class="display-5 my-2 text-primary fw-light">$24.99</p>
+                            <p class="card-text mx-3 text-muted d-none d-lg-block">
+                                Suitable for anyone who already has healthcare background
+                                or is pursuing a career in medicine, clinical nutrition, or
+                                registered dietitian.
+                            </p>
+                            <a href="#" class="btn btn-outline-primary btn-lg mt-1">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end of row -->
+
+        </div> <!-- end of container-lg -->
+
+    </section>
+    
+
+    <!-- topics at a glance -->
+    <!-- using accordions which are new to bootstrap 5 -->
+    <section id="topics">
+        <div class="container-md">
+ 
+            <div class="text-center">
+                <h2 class="text-center">
+                    <i class="bi bi-book-half"></i>
+                    Inside the Book
+                </h2>
+                <p class="lead text-muted">A Quick Glance at the Topics you'll Learn</p>
+            </div>
+
+            <!-- ROW: -->
+            <div class="row my-0 justify-content-around align-items-center g-5">
+
+                <!-- IMAGE -->
+                <div class="col-6 col-lg-4">
+                    <img class="img-fluid" src="/assets/kindle_reader.jpg" alt="ebook">
+                </div>
+
+                <!-- ACCORDION -->
+                <!-- for smaller screen the accordion will be shown at 100% of width until 
+                     it reaches the large screen, then it will be shown with 6 col width -->
+
+                <div class="col-lg-7">
+ 
+                    <div class="accordion" id="chapters">
+
+                        <!-- ITEM: -->
+                        <div class="accordion-item">
+        
+                            <!-- ITEM HEADER: -->
+                            <!-- aria-expanded="true" as the first item is open initially -->
+                            <h2 class="accordion-header" id="heading-1">
+                                
+                                <button class="accordion-button" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#chapter-1"
+                                        aria-expanded="true" aria-controls="chapter-1">
+                                        <span class="px-2"><i class="bi bi-lungs-fill"></i></span>
+                                        Part 1 - Understanding the Elements of Health
+                                </button>
+                            </h2>
+        
+                            <!-- ITEM CONTENT: -->
+                            <!-- id has to be "chapter-1" because data-bs-target="#chapter-1" -->
+                            <div id="chapter-1" class="accordion-collapse collapse show"
+                                 aria-labelledby="heading-1" data-bs-parent="#chapters">
+                                <div class="accordion-body">
+                                    <p>
+                                        Individual nutrients differ in form and function, 
+                                        and in the amount needed by the body; however, 
+                                        they are all vital to our health. 
+                                    </p>
+                                    <p>
+                                        Research has shown that each part of the body 
+                                        contains high concentrations of certain nutrients. 
+                                        A deficiency of those nutrients will cause the body part 
+                                        to malfunction and eventually break down. To keep this 
+                                        from happening, we need a proper diet and appropriate 
+                                        nutritional supplements.
+                                    </p>
+                                </div>
+                            </div>
+        
+                            <!-- ITEM HEADER: -->
+                            <h2 class="accordion-header" id="heading-2">
+                                <button class="accordion-button" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#chapter-2"
+                                        aria-expanded="false" aria-controls="chapter-2">
+                                        <span class="px-2"><i class="bi bi-capsule"></i></span>
+                                        Part 2 - The Disorders
+                                </button>
+                            </h2>
+        
+                            <!-- ITEM CONTENT: -->
+                            <!-- id has to be "chapter-2" because data-bs-target="#chapter-2" -->
+                            <div id="chapter-2" class="accordion-collapse collapse collapse"
+                                 aria-labelledby="heading-2" data-bs-parent="#chapters">
+                                <div class="accordion-body">
+                                    <p>
+                                        Part 1 explored the nutritional and dietary needs of the body. 
+                                        In order to be well, the parts of the body must be fueled properly 
+                                        so that breakdown does not occur.
+                                    </p>
+                                    <p>
+                                       Your health care provider may recommend that certain diagnostic tests 
+                                       be performed to help in making a diagnosis. Once a diagnosis has been 
+                                       confirmed, refer to the appropriate dietary guidelines, recommendations, 
+                                       and supplementation program to help speed your recovery.
+                                    </p>
+                                </div>
+                            </div>
+        
+                            
+                            <!-- ITEM HEADER: -->
+                            <h2 class="accordion-header" id="heading-3">
+                                <button class="accordion-button" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#chapter-3"
+                                        aria-expanded="false" aria-controls="chapter-3">
+                                        <span class="px-2"><i class="bi bi-egg-fried"></i></span>
+                                        Part 3 - Remedies and Therapies
+                                </button>
+                            </h2>
+        
+                            <!-- ITEM CONTENT: -->
+                            <!-- id has to be "chapter-3" because data-bs-target="#chapter-3" -->
+                            <div id="chapter-3" class="accordion-collapse collapse collapse"
+                                 aria-labelledby="heading-3" data-bs-parent="#chapters">
+                                <div class="accordion-body">
+                                    <p>
+                                        In Part 2, various treatment programs were recommended for 
+                                        each of the health problems discussed. Part 3 explains how 
+                                        to implement some of the remedies and therapies discussed earlier, 
+                                        as well as providing information about some cutting-edge technologies 
+                                        that are showing promise in the treatment of various disorders.
+                                    </p>
+                                    <p>
+                                        After learning about what is available out there, you will be able to 
+                                        choose the options that are most suitable for you and your situation.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div> <!-- accordion-item -->
+                    </div> <!-- end of accordion -->
+                </div> <!-- outer div of accordion -->
+            </div> <!-- row -->
+        </div> <!-- container-md -->
+    </section>
+
+
+    <!-- reviews list -->
+    <section id="reviews" class="">
+
+        <!-- CONTAINER: -->
+        <!-- need a container inside section -->
+        <div class="container-lg">
+
+            <!-- PART 1: HEADING -->
+            <div class="text-center">
+                <h2><i class="bi bi-stars text-dark"></i>Book Reviews</h2>
+                <p class="lead">What Readers have said About the Book</p>
+            </div>
+
+            <!-- PART 2: ROW -->
+            <div class="row justify-content-center my-0">
+
+                <!-- COL -->
+                <div class="col-lg-8">
+
+                    <!-- LIST GROUP -->
+                    <div class="list-group">
+
+                        <!-- LIST GROUP ITEM -->
+                        <div class="list-group-item py-2">
+                            <div class="pb-2"> <!-- padding at bottom -->
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                            </div>
+                            <h5 class="mb-1">Excellent Reference for Everyone</h5>
+                            <p class="mb-1">
+                                I started using this book as a professional and keep a copy 
+                                now at home. Any time I or anyone around me have ailments, 
+                                I simply look them up and take out some of the advice. 
+                                It is full of of guides and information on vitamins, minerals 
+                                and other nutrients. I would recomend this to anyone who want to
+                                maintain optimal health using drug-free remedies.
+                            </p>
+                            <small>Review by Mario A.</small>
+                        </div> <!-- end of list group item -->
+
+                        <!-- LIST GROUP ITEM -->
+                        <div class="list-group-item py-3">
+                            <div class="pb-2"> <!-- padding at bottom -->
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-fill text-dark"></i>
+                                <i class="bi bi-star-half text-dark"></i>
+                            </div>
+                            <h5 class="mb-1">A Great Book to Have</h5>
+                            <p class="mb-1">
+                                I have had & used this book so much for so long. 
+                                Great resources & on key & correct information. 
+                                Gives you a explanation of symptoms of a problem & gives a list of natural & healthy
+                                alternatives. I have given this book to so many who are looking for answers 
+                                or just a little extra help in the healthy department. 
+                            </p>
+                            <small>Review by Mary S.</small>
+                        </div> <!-- end of list group item -->
+
+                    </div> <!-- end of list group -->
+
+                </div> <!-- end of list group container -->
+
+            </div> <!-- end of row -->
+        </div>
+    </section>
+
+
+ <!-- get updates / modal trigger -->
+    <!-- no need for id because we are not navigate to this section from navbar -->
+    <section class="">
+
+        <!-- CONTAINER -->
+        <div class="container">
+
+            <!-- PART 1: HEADING -->
+            <div class="text-center">
+                <h2>
+                    <i class="bi bi-check-circle-fill"></i>
+                    Stay in The Loop
+                </h2>
+                <p class="lead">Get Updates about the Next Release</p>
+            </div>
+
+            <!-- PART 2: ROW -->
+            <div class="row justify-content-center">
+                <!-- COL -->
+                <div class="col-md-8 text-center">
+                    <p class="text-muted mb-3">
+                       Whether you are looking for relief from a particular ailment or simply wish to maintain optimum health, the author has a solution for you.
+                    </p>
+                   <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">
+                           Register for Updates
+                   </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- contact form -->
+    <!-- form-control, form-label, form-select, input-group, input-group-text -->
+    <section id="contact" class="bg-primary">
+
+        <!-- need a container inside section -->
+        <div class="container-lg">
+
+            <!-- PART 1: HEADING -->
+            <div class="text-center">
+                <h2>
+                    <i class="bi bi-envelope-fill"></i>
+                    Get in Touch
+                </h2>
+                <p class="lead">Questions about the Book or the Author?</p>
+            </div>
+
+            <!-- PART 2: ROW -->
+            <div class="row justify-content-center">
+
+                <div class="col-lg-6">
+                    <form>
+                        <!-- label for "email" is associated with the input id -->
+                        <label for="email" class="form-label">Email</label>
+
+                        <!-- INPUT GROUP -->
+                        <div class="mb-1 input-group">
+                            <!-- INPUT GROUP TEXT -->
+                            <span class="input-group-text">
+                               <i class="bi bi-envelope-fill"></i>
+                            </span>
+                            <input type="text" class="form-control" id="email" placeholder="e.g. mario@gmail.com">
+                            <span class="input-group-text">
+                                <span class="tt" data-bs-placement="" title="Enter an email we can reply to.">
+                                    <i class="bi bi-question-circle text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                      
+                        <label for="name" class="form-label">Name</label>
+                        <!-- INPUT GROUP -->
+                        <div class="input-group mb-1">
+                            <!-- INPUT GROUP TEXT -->
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                             </span>
+                            <input type="text" class="form-control" id="name" placeholder="e.g. Mario">
+                            <span class="input-group-text">
+                                <span class="tt" data-bs-placement="" title="Pretty self-explanatory really...">
+                                    <i class="bi bi-question-circle text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        
+                        <label for="subject" class="form-label">What is your question about?</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-question-circle-fill"></i>
+                             </span>
+                            <select class="form-select" id="subject">
+                                <option value="content">Content</option>
+                                <option value="order">Order</option>
+                                <option value="pricing" selected>Pricing</option>
+                                <option value="technical">Technical</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- for textarea, only id is needed and name is not needed. -->
+                        <!-- use floating form with label inside of textarea and it will
+                             change a bit when clicked. pay attention to the label: 
+                             we have removed the 'form-label' class -->
+                        <div class="form-floating mb-2 mt-3">
+                            <textarea id="query" class="form-control" style="height: 140px"></textarea>
+                            <label for="query">Your query...</label>
+                        </div>
+
+                        <div class="mt-3 text-center">
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                        </div>
+
+                    </form>
+
+                </div> <!-- end of col -->
+
+            </div> <!-- end of row -->
+            
+        </div> <!-- end of container -->
+    </section>
+
+   
+    <!-- modal itself ( modal is also known as popup ) -->
+    <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
+    <!-- aria-hidden="true" means it won't be shown on the page -->
+    <!-- this modal will "fade" when clicked, and the id must match data-bs-target -->
+    <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+
+        <!-- MODAL DIALOG -->
+        <!-- the modal dialog is what will popup on the screen -->
+        <div class="modal-dialog">
+
+            <!-- MODAL CONTENT -->
+            <div class="modal-content">
+
+                <!-- MODAL HEADER -->
+                <div class="modal-header">
+                    <!-- since aria-labelledby="modal-title", the model title will be set 
+                         to the content of the <h5> that has an id of "modal-title "-->
+                    <h5 class="modal-title" id="modal-title">The 5th Edition will include:</h5>
+
+                    <!-- with class="btn-class", bootstrap will auto position button at the right place-->
+                    <!-- data-bs-dismiss="modal" is telling bootstrap what it dismiss 
+                         which is the <div> with the class of "modal" above -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- MODAL BODY -->
+                <div class="modal-body">
+                    <ul>
+                        <li>The most up-to-date research on disorders such as cardiovascular disease and diabetes.</li>
+                        <li>New discussions that reflect our evolving understanding of vitamin E and vitamin B12.</li>
+                        <li>Updated dosage recommendations for vitamins, herbs, and other supplements.</li>
+                    </ul>
+   
+                    <!-- the lable for="modal-email" can be anything you name -->
+                    <label for="modal-email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="modal-email" placeholder="e.g. mario@example.com">
+                </div>
+
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- offcanvas itself -->
+    <!-- "offcanvas-start" is to show canvas on the left -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
+
+        <!-- CANVAS HEADER -->
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebar-label">The Complete Library</h5>  <!-- the id must match aria-labelledby -->
+            <!-- the data-bs-dismiss="offcanvas" is the <div> with the class of "offcanvas" -->
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <!-- CANVAS BODY -->
+        <div class="offcanvas-body">
+
+            <p>
+            Kathreen was a certified nutritional consultant who received her certification 
+            from the American Association of Nutritional Consultants and was a leading nutritional 
+            counselor for more than two decades. She came to the field as a result of experiencing 
+            firsthand the benefits of using diet and nutrition as remedies for sickness.
+            </p>
+
+            <!-- dropdown -->
+            <div class="dropdown mt-3">
+
+                <button class="btn btn-secondary dropdown-toggle" type="button" 
+                        id="book-dropdown" data-bs-toggle="dropdown">  <!-- the id must match aria-labelledby -->
+                        Also Available
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="book-dropdown">
+                    <li><a href="#" class="dropdown-item">The Power of Herbal Healing</a></li>
+                    <li><a href="#" class="dropdown-item">The Power of Dietary Wellness</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!-- need javascript for tooltip to work -->
+<script>
+    const tooltips = document.querySelectorAll('.tt');
+    tooltips.forEach( t => {
+        new bootstrap.Tooltip(t);
+    });
+</script>
+</body>
+</html>
