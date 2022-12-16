@@ -1,2 +1,0 @@
-# render cloud hosting requires a 'build' folder for building app.
-# git add requires the 'build' folder to contain at least a file 
